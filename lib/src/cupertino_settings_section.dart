@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 
 import 'colors.dart';
-import 'cupertino_settings_item.dart';
 import 'defines.dart';
 
 class CupertinoSettingsSection extends StatelessWidget {
