@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:settings_ui/settings_ui.dart';
+import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 
 class LanguagesScreen extends StatefulWidget {
+  const LanguagesScreen({Key? key}) : super(key: key);
   @override
   _LanguagesScreenState createState() => _LanguagesScreenState();
 }
@@ -12,7 +13,7 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Languages')),
+      appBar: AppBar(title: const Text('Languages')),
       body: SettingsList(
         sections: [
           SettingsSection(tiles: [
@@ -52,8 +53,8 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
 
   Widget trailingWidget(int index) {
     return (languageIndex == index)
-        ? Icon(Icons.check, color: Colors.blue)
-        : Icon(null);
+        ? const Icon(Icons.check, color: Colors.blue)
+        : const Icon(null);
   }
 
   void changeLanguage(int index) {

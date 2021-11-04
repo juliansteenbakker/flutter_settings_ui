@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:settings_ui/src/abstract_section.dart';
-import 'package:settings_ui/src/cupertino_settings_section.dart';
-import 'package:settings_ui/src/settings_tile.dart';
+import 'package:flutter_settings_ui/src/abstract_section.dart';
+import 'package:flutter_settings_ui/src/cupertino_settings_section.dart';
+import 'package:flutter_settings_ui/src/settings_tile.dart';
 
 import 'defines.dart';
 
@@ -101,16 +101,16 @@ class SettingsSection extends AbstractSection {
           child: subtitle,
         ),
       ListView.separated(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: tiles!.length,
         separatorBuilder: (BuildContext context, int index) =>
-            Divider(height: 1),
+            const Divider(height: 1),
         itemBuilder: (BuildContext context, int index) {
           return tiles![index];
         },
       ),
-      if (showBottomDivider) Divider(height: 1)
+      if (showBottomDivider) const Divider(height: 1)
     ]);
   }
 }

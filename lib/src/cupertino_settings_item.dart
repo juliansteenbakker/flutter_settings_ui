@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_settings_ui/src/settings_tile_theme.dart';
 
+import '../flutter_settings_ui.dart';
 import 'colors.dart';
 import 'defines.dart';
 
@@ -9,34 +11,39 @@ enum SettingsItemType {
   modal,
 }
 
-typedef void PressOperationCallback();
+typedef PressOperationCallback = void Function();
 
 class CupertinoSettingsItem extends StatefulWidget {
-  const CupertinoSettingsItem({
-    required this.type,
-    this.label,
-    this.labelWidget,
-    this.labelMaxLines,
-    this.subtitle,
-    this.subtitleWidget,
-    this.subtitleMaxLines,
-    this.leading,
-    this.trailing,
-    this.iosChevron = defaultCupertinoForwardIcon,
-    this.iosChevronPadding = defaultCupertinoForwardPadding,
-    this.value,
-    this.valueWidget,
-    this.hasDetails = false,
-    this.enabled = true,
-    this.onPress,
-    this.switchValue = false,
-    this.onToggle,
-    this.labelTextStyle,
-    this.subtitleTextStyle,
-    this.valueTextStyle,
-    this.switchActiveColor,
-  })  : assert(labelMaxLines == null || labelMaxLines > 0),
-        assert(subtitleMaxLines == null || subtitleMaxLines > 0);
+  const CupertinoSettingsItem(
+      {Key? key,
+        required this.type,
+      this.label,
+      this.labelWidget,
+      this.labelMaxLines,
+      this.subtitle,
+      this.subtitleWidget,
+      this.subtitleMaxLines,
+      this.leading,
+      this.trailing,
+      this.iosChevron = defaultCupertinoForwardIcon,
+      this.iosChevronPadding = defaultCupertinoForwardPadding,
+      this.value,
+      this.valueWidget,
+      this.hasDetails = false,
+      this.enabled = true,
+      this.onPress,
+      this.switchValue = false,
+      this.onToggle,
+      this.labelTextStyle,
+      this.subtitleTextStyle,
+      this.valueTextStyle,
+      this.switchActiveColor,
+      this.listTileTheme,
+      this.position
+      })
+      : assert(labelMaxLines == null || labelMaxLines > 0),
+        assert(subtitleMaxLines == null || subtitleMaxLines > 0),
+        super(key: key);
 
   final String? label;
   final Widget? labelWidget;
@@ -60,14 +67,34 @@ class CupertinoSettingsItem extends StatefulWidget {
   final TextStyle? subtitleTextStyle;
   final TextStyle? valueTextStyle;
   final Color? switchActiveColor;
+  final SettingsTileTheme? listTileTheme;
+  final Position? position;
 
   @override
-  State<StatefulWidget> createState() => new CupertinoSettingsItemState();
+  State<StatefulWidget> createState() => CupertinoSettingsItemState();
 }
 
 class CupertinoSettingsItemState extends State<CupertinoSettingsItem> {
   bool pressed = false;
   bool? _checked;
+
+
+
+  BorderRadius? radius(bool isLargeScreen) {
+    if (!isLargeScreen) return null;
+    switch (widget.position) {
+      case Position.first:
+        return const BorderRadius.vertical(top: Radius.circular(20));
+      case Position.last:
+        return const BorderRadius.vertical(bottom: Radius.circular(20));
+      case Position.both:
+        return const BorderRadius.all(Radius.circular(20));
+      case Position.none:
+        return null;
+      default:
+        return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +104,24 @@ class CupertinoSettingsItemState extends State<CupertinoSettingsItem> {
     final isLargeScreen = MediaQuery.of(context).size.width >= 768;
 
     final ThemeData theme = Theme.of(context);
-    final ListTileTheme tileTheme = ListTileTheme.of(context);
+    final ListTileTheme? listTileThemes = ListTileTheme(
+      dense: widget.listTileTheme?.dense ?? ListTileTheme.of(context).dense,
+      shape: widget.listTileTheme?.shape,
+      style: widget.listTileTheme?.style ?? ListTileTheme.of(context).style,
+      selectedColor: widget.listTileTheme?.selectedColor,
+      iconColor: widget.listTileTheme?.iconColor,
+      textColor: widget.listTileTheme?.textColor,
+      contentPadding: widget.listTileTheme?.contentPadding,
+      tileColor: widget.listTileTheme?.tileColor,
+      selectedTileColor: widget.listTileTheme?.selectedTileColor,
+      enableFeedback: widget.listTileTheme?.enableFeedback,
+      horizontalTitleGap: widget.listTileTheme?.horizontalTitleGap,
+      minVerticalPadding: widget.listTileTheme?.minVerticalPadding,
+      minLeadingWidth: widget.listTileTheme?.minLeadingWidth,
+      child: const SizedBox.shrink(),
+    );
+
+    final ListTileTheme tileTheme = listTileThemes ?? ListTileTheme.of(context);
 
     final iconThemeData = IconThemeData(
       color: widget.enabled
@@ -97,8 +141,8 @@ class CupertinoSettingsItemState extends State<CupertinoSettingsItem> {
     if (leadingIcon != null) {
       rowChildren.add(
         Padding(
-          padding: const EdgeInsetsDirectional.only(
-            start: 15.0,
+          padding: EdgeInsetsDirectional.only(
+            start: tileTheme.minLeadingWidth ?? 15.0,
           ),
           child: leadingIcon,
         ),
@@ -113,9 +157,10 @@ class CupertinoSettingsItemState extends State<CupertinoSettingsItem> {
             overflow: TextOverflow.ellipsis,
             style: widget.labelTextStyle ??
                 TextStyle(
-                  fontSize: 16,
-                  color: widget.enabled ? null : CupertinoColors.inactiveGray,
-                ),
+                    fontSize: 16,
+                    color: !widget.enabled
+                        ? CupertinoColors.inactiveGray
+                        : widget.listTileTheme?.textColor),
           );
     } else {
       titleSection = Column(
@@ -136,7 +181,7 @@ class CupertinoSettingsItemState extends State<CupertinoSettingsItem> {
                 maxLines: widget.subtitleMaxLines,
                 overflow: TextOverflow.ellipsis,
                 style: widget.subtitleTextStyle ??
-                    TextStyle(
+                    const TextStyle(
                       fontSize: 12.0,
                       letterSpacing: -0.2,
                     ),
@@ -158,7 +203,7 @@ class CupertinoSettingsItemState extends State<CupertinoSettingsItem> {
     switch (widget.type) {
       case SettingsItemType.toggle:
         rowChildren
-          ..add(
+          .add(
             Padding(
               padding: const EdgeInsetsDirectional.only(end: 11.0),
               child: CupertinoSwitch(
@@ -192,7 +237,7 @@ class CupertinoSettingsItemState extends State<CupertinoSettingsItem> {
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.end,
                       style: widget.valueTextStyle ??
-                          TextStyle(
+                          const TextStyle(
                             color: CupertinoColors.inactiveGray,
                             fontSize: 16,
                           ),
@@ -295,9 +340,8 @@ class CupertinoSettingsItemState extends State<CupertinoSettingsItem> {
       },
       child: Container(
         decoration: BoxDecoration(
-          borderRadius:
-              isLargeScreen ? BorderRadius.all(Radius.circular(20)) : null,
-          color: calculateBackgroundColor(context),
+          borderRadius: radius(isLargeScreen),
+          color: tileTheme.tileColor ?? calculateBackgroundColor(context),
         ),
         height: widget.subtitle == null && widget.subtitleWidget == null
             ? 44.0
@@ -319,9 +363,9 @@ class CupertinoSettingsItemState extends State<CupertinoSettingsItem> {
               : iosTileDarkColor;
 
   Color? _iconColor(ThemeData theme, ListTileTheme tileTheme) {
-    if (tileTheme.selectedColor != null) {
-      return tileTheme.selectedColor;
-    }
+    // if (tileTheme.selectedColor != null) {
+    //   return tileTheme.selectedColor;
+    // }
 
     if (tileTheme.iconColor != null) {
       return tileTheme.iconColor;

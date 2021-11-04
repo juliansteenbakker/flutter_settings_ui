@@ -1,21 +1,23 @@
 name: example
 description: A new Flutter project.
 version: 1.0.0+1
+publish_to: none
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  device_preview: ^0.6.2-beta
-  settings_ui:
+  cupertino_icons: ^1.0.3
+  device_preview: ^0.7.4
+  flutter_settings_ui:
     path: ../
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^1.0.4
 
 flutter:
   uses-material-design: true

@@ -1,19 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:settings_ui/settings_ui.dart';
+import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 
 import 'colors.dart';
+import 'cupertino_settings_item.dart';
 import 'defines.dart';
 
 class CupertinoSettingsSection extends StatelessWidget {
   const CupertinoSettingsSection(
     this.items, {
+      Key? key,
     this.header,
     this.headerPadding = defaultTitlePadding,
     this.footer,
-  });
+  }) : super(key: key);
 
-  final List<Widget> items;
+  final List<AbstractTile> items;
 
   final Widget? header;
   final EdgeInsetsGeometry headerPadding;
@@ -36,6 +38,9 @@ class CupertinoSettingsSection extends StatelessWidget {
         ),
       ));
     }
+
+    // if (items.first is SettingsTile) (items.first as SettingsTile).position = Position.first;
+    // if (items.last is SettingsTile) (items.last as SettingsTile).position = Position.last;
 
     List<Widget> itemsWithDividers = [];
     for (int i = 0; i < items.length; i++) {
@@ -63,7 +68,7 @@ class CupertinoSettingsSection extends StatelessWidget {
     columnChildren.add(largeScreen
         ? Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
               color: Theme.of(context).brightness == Brightness.light
                   ? CupertinoColors.white
                   : iosTileDarkColor,
@@ -78,12 +83,12 @@ class CupertinoSettingsSection extends StatelessWidget {
               color: Theme.of(context).brightness == Brightness.light
                   ? CupertinoColors.white
                   : iosTileDarkColor,
-              border: Border(
-                top: const BorderSide(
+              border: const Border(
+                top: BorderSide(
                   color: borderColor,
                   width: 0.3,
                 ),
-                bottom: const BorderSide(
+                bottom: BorderSide(
                   color: borderColor,
                   width: 0.3,
                 ),
@@ -97,13 +102,13 @@ class CupertinoSettingsSection extends StatelessWidget {
 
     if (footer != null) {
       columnChildren.add(DefaultTextStyle(
-        style: TextStyle(
+        style: const TextStyle(
           color: groupSubtitle,
           fontSize: 13.0,
           letterSpacing: -0.08,
         ),
         child: Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 15.0,
             right: 15.0,
             top: 7.5,
