@@ -1,6 +1,17 @@
 ## 2.0.0
 Initial fork from settings_ui
 
+#### New features
+* iPad like settings screen for iOS devices with large screens
+  NOTE: For this to work correctly you need to specifiy the SettingsTile position. Otherwise the
+  shadow won't be displayed correctly.
+  
+* Add color option to row
+
+#### Other changes
+* Minimum iOS deployment version is iOS 9
+* Migrated from pedantic to flutter_lints
+* Upgraded dependencies
 
 ## [1.0.1] - [Jul 28, 2021]
 * Allow manual platform style selection
