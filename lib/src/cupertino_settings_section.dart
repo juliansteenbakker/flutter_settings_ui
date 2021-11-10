@@ -8,7 +8,7 @@ import 'defines.dart';
 class CupertinoSettingsSection extends StatelessWidget {
   const CupertinoSettingsSection(
     this.items, {
-      Key? key,
+    Key? key,
     this.header,
     this.headerPadding = defaultTitlePadding,
     this.footer,
@@ -22,7 +22,7 @@ class CupertinoSettingsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> columnChildren = [];
+    final columnChildren = <Widget>[];
     if (header != null) {
       columnChildren.add(DefaultTextStyle(
         style: TextStyle(
