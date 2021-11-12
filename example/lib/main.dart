@@ -29,8 +29,9 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
-                primarySwatch: Colors.deepPurple, brightness: Brightness.dark)
-            .copyWith(secondary: Colors.deepPurple),
+          primarySwatch: Colors.deepPurple,
+          brightness: Brightness.dark,
+        ).copyWith(secondary: Colors.deepPurple),
       ),
       home: const SettingsScreen(),
     );

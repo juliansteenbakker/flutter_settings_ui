@@ -1,3 +1,8 @@
+## 2.0.1
+* Drop declaring variable types.
+* Use `<T>[]` to create a new array.
+* Reformat code.
+
 ## 2.0.0
 Initial fork from settings_ui
 
