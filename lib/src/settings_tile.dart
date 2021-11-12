@@ -14,7 +14,6 @@ enum Position {
   none,
 }
 
-
 abstract class AbstractTile extends StatelessWidget {
   const AbstractTile({Key? key}) : super(key: key);
 }
@@ -47,54 +46,54 @@ class SettingsTile extends AbstractTile {
 
   final cupertinoKey = GlobalKey<CupertinoSettingsItemState>();
 
-  SettingsTile({
-    Key? key,
-    this.title,
-    this.titleWidget,
-    this.titleMaxLines,
-    this.subtitle,
-    this.subtitleMaxLines,
-    this.leading,
-    this.trailing,
-    this.subtitleWidget,
-    this.iosChevron = defaultCupertinoForwardIcon,
-    this.iosChevronPadding = defaultCupertinoForwardPadding,
-    @Deprecated('Use onPressed instead') this.onTap,
-    this.titleTextStyle,
-    this.subtitleTextStyle,
-    this.enabled = true,
-    this.onPressed,
-    this.switchActiveColor,
-    this.platform,
-    this.theme,
-    this.position
-  })  : _tileType = _SettingsTileType.simple,
+  SettingsTile(
+      {Key? key,
+      this.title,
+      this.titleWidget,
+      this.titleMaxLines,
+      this.subtitle,
+      this.subtitleMaxLines,
+      this.leading,
+      this.trailing,
+      this.subtitleWidget,
+      this.iosChevron = defaultCupertinoForwardIcon,
+      this.iosChevronPadding = defaultCupertinoForwardPadding,
+      @Deprecated('Use onPressed instead') this.onTap,
+      this.titleTextStyle,
+      this.subtitleTextStyle,
+      this.enabled = true,
+      this.onPressed,
+      this.switchActiveColor,
+      this.platform,
+      this.theme,
+      this.position})
+      : _tileType = _SettingsTileType.simple,
         onToggle = null,
         switchValue = null,
         assert(titleMaxLines == null || titleMaxLines > 0),
         assert(subtitleMaxLines == null || subtitleMaxLines > 0),
         super(key: key);
 
-  SettingsTile.switchTile({
-    Key? key,
-    this.title,
-    this.titleWidget,
-    this.titleMaxLines,
-    this.subtitle,
-    this.subtitleMaxLines,
-    this.leading,
-    this.enabled = true,
-    this.trailing,
-    this.subtitleWidget,
-    required this.onToggle,
-    required this.switchValue,
-    this.titleTextStyle,
-    this.subtitleTextStyle,
-    this.switchActiveColor,
-    this.platform,
-    this.theme,
-    this.position
-  })  : _tileType = _SettingsTileType.switchTile,
+  SettingsTile.switchTile(
+      {Key? key,
+      this.title,
+      this.titleWidget,
+      this.titleMaxLines,
+      this.subtitle,
+      this.subtitleMaxLines,
+      this.leading,
+      this.enabled = true,
+      this.trailing,
+      this.subtitleWidget,
+      required this.onToggle,
+      required this.switchValue,
+      this.titleTextStyle,
+      this.subtitleTextStyle,
+      this.switchActiveColor,
+      this.platform,
+      this.theme,
+      this.position})
+      : _tileType = _SettingsTileType.switchTile,
         onTap = null,
         onPressed = null,
         iosChevron = null,
