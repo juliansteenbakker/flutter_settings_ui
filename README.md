@@ -11,7 +11,7 @@
 In your pubspec.yaml
 ```yaml
 dependencies:
-  flutter_settings_ui: ^1.0.1
+  flutter_settings_ui: ^2.0.1
 ```
 ```dart
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
