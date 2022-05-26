@@ -158,6 +158,7 @@ class CupertinoSettingsItemState extends State<CupertinoSettingsItem> {
           Text(
             widget.label ?? '',
             overflow: TextOverflow.ellipsis,
+            maxLines: widget.labelMaxLines,
             style: widget.labelTextStyle ??
                 TextStyle(
                     fontSize: 16,
@@ -175,6 +176,7 @@ class CupertinoSettingsItemState extends State<CupertinoSettingsItem> {
               Text(
                 widget.label ?? '',
                 overflow: TextOverflow.ellipsis,
+                maxLines: widget.labelMaxLines,
                 style: widget.labelTextStyle,
               ),
           const SizedBox(height: 2.5),
