@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_ui/src/abstract_section.dart';
 import 'package:flutter_settings_ui/src/cupertino_settings_section.dart';
