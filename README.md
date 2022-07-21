@@ -1,3 +1,7 @@
+# Archived
+This project is archived since the functions that where added to this project are now also available on the source of this fork.
+Please checkout https://pub.dev/packages/settings_ui
+
 # Settings UI for Flutter
 
 [![Pub Version](https://img.shields.io/pub/v/flutter_settings_ui?color=blueviolet)](https://pub.dev/packages/flutter_settings_ui)
