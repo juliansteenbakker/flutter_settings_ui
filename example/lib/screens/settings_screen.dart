@@ -30,6 +30,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SettingsTile(
               title: 'Language',
               subtitle: 'English',
+              subtitleBelowTitle: true,
               leading: const Icon(Icons.language),
               onPressed: (context) {
                 Navigator.of(context).push(MaterialPageRoute(
@@ -102,6 +103,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             SettingsTile.switchTile(
               title: 'Enable Notifications',
+              subtitle: 'test',
               enabled: notificationsEnabled,
               leading: const Icon(Icons.notifications_active),
               switchValue: true,

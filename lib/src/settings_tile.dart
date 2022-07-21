@@ -24,6 +24,7 @@ class SettingsTile extends AbstractTile {
   final String? subtitle;
   final Widget? subtitleWidget;
   final int? subtitleMaxLines;
+  final bool subtitleBelowTitle;
   final Widget? leading;
   final Widget? trailing;
   final Icon? iosChevron;
@@ -63,6 +64,7 @@ class SettingsTile extends AbstractTile {
       this.enabled = true,
       this.onPressed,
       this.switchActiveColor,
+      this.subtitleBelowTitle = false,
       this.platform,
       this.theme,
       this.position})
@@ -86,6 +88,7 @@ class SettingsTile extends AbstractTile {
       this.subtitleWidget,
       required this.onToggle,
       required this.switchValue,
+      this.subtitleBelowTitle = false,
       this.titleTextStyle,
       this.subtitleTextStyle,
       this.switchActiveColor,
@@ -151,7 +154,8 @@ class SettingsTile extends AbstractTile {
         subtitleWidget: subtitleWidget,
         label: title ?? '',
         labelMaxLines: titleMaxLines,
-        value: subtitle,
+        subtitle: subtitleBelowTitle ? subtitle : null,
+        value: subtitleBelowTitle ? null : subtitle,
         valueWidget: subtitleWidget,
         trailing: trailing,
         iosChevron: iosChevron,
