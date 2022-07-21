@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_ui/src/cupertino_settings_item.dart';
 import 'package:flutter_settings_ui/src/settings_tile_theme.dart';
