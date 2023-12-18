@@ -1,3 +1,16 @@
+## 3.0.0
+Breaking changes:
+- [SettingsSection, SettingsTile] title is now a Widget instead of String
+- [SettingsTile] Subtitle is renamed to Description
+- [SettingsTile] subtitleBelowTitle is removed. descriptionInlineIos is added.
+- [CustomTile] is renamed to [CustomSettingsTile]
+- [CustomSection] is renamed to [CustomSettingsSection]
+- [SettingsTile.switchTile] switchValue is renamed to initialValue
+
+Other changes:
+- Updated dependencies
+- Reformatted code to latest conventions
+
 ## 2.0.1
 * Drop declaring variable types.
 * Use `<T>[]` to create a new array.
