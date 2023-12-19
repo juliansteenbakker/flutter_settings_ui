@@ -1,10 +1,9 @@
-# Archived
-This project is archived since the functions that where added to this project are now also available on the source of this fork.
-Please checkout https://pub.dev/packages/settings_ui
-
 # Settings UI for Flutter
 
 [![Pub Version](https://img.shields.io/pub/v/flutter_settings_ui?color=blueviolet)](https://pub.dev/packages/flutter_settings_ui)
+
+This project was archived, however since the original package seems unmaintained yet, i reactivated this package together with some improvements and changes.
+Please checkout the changelog for all changes.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/yako-dev/flutter-settings-ui/master/assets/flutter_settings_ui_logo.png" height="500px">
@@ -15,7 +14,7 @@ Please checkout https://pub.dev/packages/settings_ui
 In your pubspec.yaml
 ```yaml
 dependencies:
-  flutter_settings_ui: ^2.0.1
+  flutter_settings_ui: ^3.0.0
 ```
 ```dart
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
