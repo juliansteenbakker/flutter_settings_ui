@@ -30,4 +30,4 @@ jobs:
       # Use the community Action to install Flutter
       - uses: subosito/flutter-action@v2
       - name: Format
-        run: flutter format -n --set-exit-if-changed .
+        run: dart format --set-exit-if-changed .
