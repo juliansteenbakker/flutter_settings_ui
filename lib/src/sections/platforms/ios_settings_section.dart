@@ -19,7 +19,8 @@ class IOSSettingsSection extends StatelessWidget {
     final theme = SettingsTheme.of(context);
     final isLastNonDescriptive = tiles.last is SettingsTile &&
         (tiles.last as SettingsTile).description == null;
-    final scaleFactor = MediaQuery.of(context).textScaleFactor;
+    // final scaleFactor = MediaQuery.of(context).textScaleFactor;
+    final scaleFactor = MediaQuery.textScalerOf(context).scale(1);
 
     return Padding(
       padding: margin ??
@@ -57,7 +58,7 @@ class IOSSettingsSection extends StatelessWidget {
       shrinkWrap: true,
       itemCount: tiles.length,
       padding: EdgeInsets.zero,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
         final tile = tiles[index];
 
@@ -76,7 +77,7 @@ class IOSSettingsSection extends StatelessWidget {
         if (index == tiles.length - 1 ||
             (index < tiles.length &&
                 tile is SettingsTile &&
-                (tile).description != null &&
+                tile.description != null &&
                 !tile.descriptionInlineIos)) {
           enableBottom = true;
         }

@@ -145,7 +145,7 @@ class SettingsTile extends AbstractSettingsTile {
         );
       case DevicePlatform.device:
         throw Exception(
-          'You can\'t use the DevicePlatform.device in this context. '
+          "You can't use the DevicePlatform.device in this context. "
           'Incorrect platform: SettingsTile.build',
         );
     }

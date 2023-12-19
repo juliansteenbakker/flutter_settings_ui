@@ -7,6 +7,9 @@ Breaking changes:
 - [CustomSection] is renamed to [CustomSettingsSection]
 - [SettingsTile.switchTile] switchValue is renamed to initialValue
 
+Bugs fixed:
+- Fixed an issue which caused the settings list to crash when the width of the list was smaller than the device screen width.
+
 Other changes:
 - Updated dependencies
 - Reformatted code to latest conventions

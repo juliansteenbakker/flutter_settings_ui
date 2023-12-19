@@ -52,7 +52,7 @@ class SettingsList extends StatelessWidget {
 
     final brightness = calculateBrightness(context);
 
-    final themeData = ThemeProvider.getTheme(
+    final themeData = getTheme(
       context: context,
       platform: platform,
       brightness: brightness,

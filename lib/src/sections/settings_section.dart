@@ -48,7 +48,7 @@ class SettingsSection extends AbstractSettingsSection {
         );
       case DevicePlatform.device:
         throw Exception(
-          'You can\'t use the DevicePlatform.device in this context. '
+          "You can't use the DevicePlatform.device in this context. "
           'Incorrect platform: SettingsSection.build',
         );
     }

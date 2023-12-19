@@ -20,7 +20,8 @@ class WebSettingsSection extends StatelessWidget {
 
   Widget buildSectionBody(BuildContext context) {
     final theme = SettingsTheme.of(context);
-    final scaleFactor = MediaQuery.of(context).textScaleFactor;
+    // final scaleFactor = MediaQuery.of(context).textScaleFactor;
+    final scaleFactor = MediaQuery.textScalerOf(context).scale(1);
 
     return Padding(
       padding: margin ?? EdgeInsets.zero,
@@ -60,12 +61,12 @@ class WebSettingsSection extends StatelessWidget {
       shrinkWrap: true,
       itemCount: tiles.length,
       padding: EdgeInsets.zero,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
         return tiles[index];
       },
       separatorBuilder: (BuildContext context, int index) {
-        return Divider(
+        return const Divider(
           height: 0,
           thickness: 1,
         );

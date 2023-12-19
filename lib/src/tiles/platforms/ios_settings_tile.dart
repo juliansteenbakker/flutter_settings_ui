@@ -35,10 +35,10 @@ class IOSSettingsTile extends StatefulWidget {
   final Color? backgroundColor;
 
   @override
-  _IOSSettingsTileState createState() => _IOSSettingsTileState();
+  IOSSettingsTileState createState() => IOSSettingsTileState();
 }
 
-class _IOSSettingsTileState extends State<IOSSettingsTile> {
+class IOSSettingsTileState extends State<IOSSettingsTile> {
   bool isPressed = false;
 
   @override
@@ -83,10 +83,10 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
     return ClipRRect(
       borderRadius: BorderRadius.vertical(
         top: additionalInfo.enableTopBorderRadius
-            ? Radius.circular(12)
+            ? const Radius.circular(12)
             : Radius.zero,
         bottom: additionalInfo.enableBottomBorderRadius
-            ? Radius.circular(12)
+            ? const Radius.circular(12)
             : Radius.zero,
       ),
       child: content,
@@ -98,7 +98,8 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
     required SettingsTheme theme,
     required IOSSettingsTileAdditionalInfo additionalInfo,
   }) {
-    final scaleFactor = MediaQuery.of(context).textScaleFactor;
+    // final scaleFactor = MediaQuery.of(context).textScaleFactor;
+    final scaleFactor = MediaQuery.textScalerOf(context).scale(1);
 
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -125,7 +126,8 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
     required BuildContext context,
     required SettingsTheme theme,
   }) {
-    final scaleFactor = MediaQuery.of(context).textScaleFactor;
+    // final scaleFactor = MediaQuery.of(context).textScaleFactor;
+    final scaleFactor = MediaQuery.textScalerOf(context).scale(1);
 
     return Row(
       children: [
@@ -178,7 +180,8 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
     SettingsTheme theme,
     IOSSettingsTileAdditionalInfo additionalInfo,
   ) {
-    final scaleFactor = MediaQuery.of(context).textScaleFactor;
+    // final scaleFactor = MediaQuery.of(context).textScaleFactor;
+    final scaleFactor = MediaQuery.textScalerOf(context).scale(1);
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -190,23 +193,20 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
               widget.onPressed!.call(context);
 
               Future.delayed(
-                Duration(milliseconds: 100),
-                () => changePressState(isPressed: false),
+                const Duration(milliseconds: 100),
+                () => changePressState(),
               );
             },
       onTapDown: (_) =>
           widget.onPressed == null ? null : changePressState(isPressed: true),
-      onTapUp: (_) =>
-          widget.onPressed == null ? null : changePressState(isPressed: false),
-      onTapCancel: () =>
-          widget.onPressed == null ? null : changePressState(isPressed: false),
+      onTapUp: (_) => widget.onPressed == null ? null : changePressState(),
+      onTapCancel: () => widget.onPressed == null ? null : changePressState(),
       child: Container(
-        color: widget.backgroundColor != null
-            ? widget.backgroundColor
-            : isPressed
+        color: widget.backgroundColor ??
+            (isPressed
                 ? theme.themeData.tileHighlightColor
-                : theme.themeData.settingsSectionBackground,
-        padding: EdgeInsetsDirectional.only(start: 18),
+                : theme.themeData.settingsSectionBackground),
+        padding: const EdgeInsetsDirectional.only(start: 18),
         child: Row(
           children: [
             if (widget.leading != null)
@@ -258,7 +258,7 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
                               if (widget.description != null &&
                                   widget.descriptionInline)
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: 6),
+                                  padding: const EdgeInsets.only(bottom: 6),
                                   child: Row(
                                     children: [
                                       DefaultTextStyle(
@@ -301,26 +301,27 @@ class IOSSettingsTileAdditionalInfo extends InheritedWidget {
   final bool enableTopBorderRadius;
   final bool enableBottomBorderRadius;
 
-  IOSSettingsTileAdditionalInfo({
+  const IOSSettingsTileAdditionalInfo({
+    Key? key,
     required this.needToShowDivider,
     required this.enableTopBorderRadius,
     required this.enableBottomBorderRadius,
     required Widget child,
-  }) : super(child: child);
+  }) : super(key: key, child: child);
 
-  @override
-  bool updateShouldNotify(IOSSettingsTileAdditionalInfo old) => true;
-
-  static IOSSettingsTileAdditionalInfo of(BuildContext context) {
+  factory IOSSettingsTileAdditionalInfo.of(BuildContext context) {
     final IOSSettingsTileAdditionalInfo? result = context
         .dependOnInheritedWidgetOfExactType<IOSSettingsTileAdditionalInfo>();
     // assert(result != null, 'No IOSSettingsTileAdditionalInfo found in context');
     return result ??
-        IOSSettingsTileAdditionalInfo(
+        const IOSSettingsTileAdditionalInfo(
           needToShowDivider: true,
           enableBottomBorderRadius: true,
           enableTopBorderRadius: true,
           child: SizedBox(),
         );
   }
+
+  @override
+  bool updateShouldNotify(IOSSettingsTileAdditionalInfo old) => true;
 }

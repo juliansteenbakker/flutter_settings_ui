@@ -89,7 +89,7 @@ class _CrossPlatformSettingsScreenState
                     ),
                   );
 
-                  if (platform != null && platform is DevicePlatform) {
+                  if (platform != null) {
                     setState(() {
                       selectedPlatform = platform;
                     });

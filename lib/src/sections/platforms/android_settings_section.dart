@@ -21,7 +21,8 @@ class AndroidSettingsSection extends StatelessWidget {
 
   Widget buildSectionBody(BuildContext context) {
     final theme = SettingsTheme.of(context);
-    final scaleFactor = MediaQuery.of(context).textScaleFactor;
+    final scaleFactor = MediaQuery.textScalerOf(context).scale(1);
+    // final scaleFactor = MediaQuery.of(context).textScaler.textScaleFactor;
     final tileList = buildTileList();
 
     if (title == null) {
@@ -58,7 +59,7 @@ class AndroidSettingsSection extends StatelessWidget {
       shrinkWrap: true,
       itemCount: tiles.length,
       padding: EdgeInsets.zero,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
         return tiles[index];
       },
