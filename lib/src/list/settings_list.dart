@@ -45,7 +45,7 @@ class SettingsList extends StatelessWidget {
   Widget build(BuildContext context) {
     DevicePlatform platform;
     if (this.platform == null || this.platform == DevicePlatform.device) {
-      platform = PlatformUtils.detectPlatform(context);
+      platform = detectPlatform(context);
     } else {
       platform = this.platform!;
     }
@@ -62,47 +62,54 @@ class SettingsList extends StatelessWidget {
       color: themeData.settingsListBackground,
       width: MediaQuery.of(context).size.width,
       alignment: Alignment.center,
-      child: SettingsTheme(
-        themeData: themeData,
-        platform: platform,
-        child: ListView.builder(
-          physics: physics,
-          shrinkWrap: shrinkWrap,
-          itemCount: sections.length,
-          padding: contentPadding ?? calculateDefaultPadding(platform, context),
-          itemBuilder: (BuildContext context, int index) {
-            return sections[index];
-          },
-        ),
+      child: LayoutBuilder(
+        builder: (context, layout) {
+          return SettingsTheme(
+            themeData: themeData,
+            platform: platform,
+            child: ListView.builder(
+              physics: physics,
+              shrinkWrap: shrinkWrap,
+              itemCount: sections.length,
+              padding: contentPadding ??
+                  calculateDefaultPadding(platform, layout.maxWidth),
+              itemBuilder: (BuildContext context, int index) {
+                return sections[index];
+              },
+            ),
+          );
+        },
       ),
     );
   }
 
   EdgeInsets calculateDefaultPadding(
-      DevicePlatform platform, BuildContext context) {
-    if (MediaQuery.of(context).size.width > 810) {
-      double padding = (MediaQuery.of(context).size.width - 810) / 2;
+    DevicePlatform platform,
+    double width,
+  ) {
+    if (width > 810) {
+      final padding = (width - 810) / 2;
       switch (platform) {
+        case DevicePlatform.web:
+          return EdgeInsets.symmetric(vertical: 20, horizontal: padding);
+        case DevicePlatform.device:
+          throw Exception(
+            "You can't use the DevicePlatform.device in this context. "
+            'Incorrect platform: SettingsList.calculateDefaultPadding',
+          );
         case DevicePlatform.android:
         case DevicePlatform.fuchsia:
         case DevicePlatform.linux:
         case DevicePlatform.iOS:
         case DevicePlatform.macOS:
         case DevicePlatform.windows:
-          return EdgeInsets.symmetric(horizontal: padding);
-        case DevicePlatform.web:
-          return EdgeInsets.symmetric(vertical: 20, horizontal: padding);
-        case DevicePlatform.device:
-          throw Exception(
-            'You can\'t use the DevicePlatform.device in this context. '
-            'Incorrect platform: SettingsList.calculateDefaultPadding',
-          );
         default:
           return EdgeInsets.symmetric(
             horizontal: padding,
           );
       }
     }
+
     switch (platform) {
       case DevicePlatform.android:
       case DevicePlatform.fuchsia:
@@ -110,12 +117,12 @@ class SettingsList extends StatelessWidget {
       case DevicePlatform.iOS:
       case DevicePlatform.macOS:
       case DevicePlatform.windows:
-        return EdgeInsets.symmetric(vertical: 0);
+        return EdgeInsets.zero;
       case DevicePlatform.web:
-        return EdgeInsets.symmetric(vertical: 20);
+        return const EdgeInsets.symmetric(vertical: 20);
       case DevicePlatform.device:
         throw Exception(
-          'You can\'t use the DevicePlatform.device in this context. '
+          "You can't use the DevicePlatform.device in this context. "
           'Incorrect platform: SettingsList.calculateDefaultPadding',
         );
     }

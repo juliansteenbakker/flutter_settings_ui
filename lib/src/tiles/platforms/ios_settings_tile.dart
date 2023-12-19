@@ -72,7 +72,7 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
     required IOSSettingsTileAdditionalInfo additionalInfo,
   }) {
     Widget content = buildTileContent(context, theme, additionalInfo);
-    DevicePlatform platform = PlatformUtils.detectPlatform(context);
+    final platform = detectPlatform(context);
     if (platform != DevicePlatform.iOS) {
       content = Material(
         color: Colors.transparent,
