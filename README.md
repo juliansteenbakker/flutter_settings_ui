@@ -26,18 +26,18 @@ import 'package:flutter_settings_ui/flutter_settings_ui.dart';
       SettingsList(
         sections: [
           SettingsSection(
-            title: 'Section',
+            title: const Text('Section'),
             tiles: [
               SettingsTile(
-                title: 'Language',
-                subtitle: 'English',
-                leading: Icon(Icons.language),
+                title: const Text('Language'),
+                description: const Text('English'),
+                leading: const Icon(Icons.language),
                 onPressed: (BuildContext context) {},
-              ),
+                ),
               SettingsTile.switchTile(
-                title: 'Use fingerprint',
-                leading: Icon(Icons.fingerprint),
-                switchValue: value,
+                initialValue: false,
+                title: const Text('Use fingerprint'),
+                leading: const Icon(Icons.fingerprint),
                 onToggle: (bool value) {},
               ),
             ],
