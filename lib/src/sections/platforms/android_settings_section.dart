@@ -22,8 +22,9 @@ class AndroidSettingsSection extends StatelessWidget {
   Widget buildSectionBody(BuildContext context) {
     final theme = SettingsTheme.of(context);
     final scaleFactor = MediaQuery.textScalerOf(context).scale(1);
-    // final scaleFactor = MediaQuery.of(context).textScaler.textScaleFactor;
-    final tileList = buildTileList();
+    final tileList = Column(
+      children: tiles,
+    );
 
     if (title == null) {
       return tileList;
@@ -51,18 +52,6 @@ class AndroidSettingsSection extends StatelessWidget {
           child: tileList,
         ),
       ],
-    );
-  }
-
-  Widget buildTileList() {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: tiles.length,
-      padding: EdgeInsets.zero,
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (BuildContext context, int index) {
-        return tiles[index];
-      },
     );
   }
 }

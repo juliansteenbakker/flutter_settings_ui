@@ -19,7 +19,6 @@ class IOSSettingsSection extends StatelessWidget {
     final theme = SettingsTheme.of(context);
     final isLastNonDescriptive = tiles.last is SettingsTile &&
         (tiles.last as SettingsTile).description == null;
-    // final scaleFactor = MediaQuery.of(context).textScaleFactor;
     final scaleFactor = MediaQuery.textScalerOf(context).scale(1);
 
     return Padding(
