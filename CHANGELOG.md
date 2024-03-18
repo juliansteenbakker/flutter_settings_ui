@@ -1,3 +1,6 @@
+## 3.0.1
+Fixed an issue which caused a double scroll animation on Android.
+
 ## 3.0.0
 Breaking changes:
 - [SettingsSection, SettingsTile] title is now a Widget instead of String
