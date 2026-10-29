@@ -21,6 +21,8 @@ class SettingsSection extends AbstractSettingsSection {
 
   @override
   Widget build(BuildContext context) {
+    if (tiles.isEmpty) return const SizedBox.shrink();
+
     final theme = SettingsTheme.of(context);
 
     switch (theme.platform) {
