@@ -1,4 +1,4 @@
-## 3.0.2
+## 3.1.0
 Fixed a crash on iOS, macOS and Windows when a `SettingsSection` has no tiles. Empty sections now render nothing on every platform.
 
 Replaced the deprecated `activeColor` on the switches. This requires Flutter 3.31.0 or newer.
