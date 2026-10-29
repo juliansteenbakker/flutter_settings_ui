@@ -136,7 +136,7 @@ class IOSSettingsTileState extends State<IOSSettingsTile> {
           CupertinoSwitch(
             value: widget.initialValue ?? true,
             onChanged: widget.onToggle,
-            activeColor: widget.enabled
+            activeTrackColor: widget.enabled
                 ? widget.activeSwitchColor
                 : theme.themeData.inactiveTitleColor,
           ),
